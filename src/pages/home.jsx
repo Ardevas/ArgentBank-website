@@ -1,8 +1,8 @@
 import React from "react";
-import IconChat from "../assets/icon-chat.svg";
-import IconMoney from "../assets/icon-money.svg";
-import IconSecurity from "../assets/icon-security.svg";
 import Feature from "../components/feature/feature";
+import iconChat from "../assets/icon-chat.svg";
+import iconMoney from "../assets/icon-money.svg";
+import iconSecurity from "../assets/icon-security.svg";
 
 export default function Home() {
   return (
@@ -22,21 +22,19 @@ export default function Home() {
         <section className="features">
           <h2 className="sr-only">Features</h2>
           <Feature
-            image={IconChat}
+            image={iconChat}
             title="You are our #1 priority"
-            description="Need to talk to a representative? You can get in touch through our 24/7 chat or through a phone call in less than 5 minutes."
+            text="Need to talk to a representative? You can get in touch through our 24/7 chat or through a phone call in less than 5 minutes."
           />
           <Feature
-            image={IconMoney}
+            image={iconMoney}
             title="More savings means higher rates"
-            description="The more you save with us, the higher your interest rate will be!"
+            text="The more you save with us, the higher your interest rate will be!"
           />
           <Feature
-            image={IconSecurity}
+            image={iconSecurity}
             title="Security you can trust"
-            description={
-              "We use top of the line encryption to make sure your data and money is always safe."
-            }
+            text="We use top of the line encryption to make sure your data and money is always safe."
           />
         </section>
       </main>
