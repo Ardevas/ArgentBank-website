@@ -1,6 +1,8 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import PrivateRoute from "./utils/privateRoute";
+import { Navigate } from "react-router-dom";
 
 // RENDER COMPONENTS
 import Home from "./pages/home";
@@ -12,8 +14,7 @@ import "./styles/main.css";
 
 // REDUX
 import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
-import rootReducer from "./reducers";
+import store from "./store/store";
 
 function App() {
   return (
@@ -22,7 +23,15 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/user" element={<User />} />
+        <Route
+          path="/user"
+          element={
+            <PrivateRoute>
+              <User />
+            </PrivateRoute>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <Footer />
     </Router>
@@ -31,10 +40,6 @@ function App() {
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
-const store = configureStore({
-  reducer: rootReducer,
-  devTools: true, // false in production !
-});
 
 root.render(
   <Provider store={store}>
