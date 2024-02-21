@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import login from "../../actions/authActions";
 
 function Login() {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -16,7 +17,9 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // console.log(credentials);
     await dispatch(login(credentials));
+    navigate("/user");
   };
 
   return (
