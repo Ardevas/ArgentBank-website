@@ -1,8 +1,10 @@
 import React from "react";
+import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
+import { useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import PrivateRoute from "./utils/privateRoute";
 import { Navigate } from "react-router-dom";
+import PrivateRoute from "./utils/privateRoute";
 
 // RENDER COMPONENTS
 import Home from "./pages/home";
@@ -15,8 +17,21 @@ import "./styles/main.css";
 // REDUX
 import { Provider } from "react-redux";
 import store from "./store/store";
+import { loadToken } from "./actions/authActions";
+import { fetchUserProfile } from "./actions/userProfile";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token"); // Récupération du token depuis le local storage
+    if (token) {
+      // S'il y a un token dans le local storage, le charger dans le store Redux
+      dispatch(loadToken(token));
+      dispatch(fetchUserProfile());
+    }
+  }, [dispatch]); // Assurez-vous de ne lancer cette action qu'une seule fois au chargement de l'application
+
   return (
     <Router>
       <Header />

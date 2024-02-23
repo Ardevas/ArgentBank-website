@@ -63,6 +63,11 @@ body {
   text-decoration: underline;
 }
 
+.main-nav-items {
+  display: flex;
+  cursor: pointer;
+}
+
 .main-nav-logo {
   display: flex;
   align-items: center;

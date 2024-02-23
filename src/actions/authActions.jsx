@@ -1,4 +1,4 @@
-const login = (credentials) => {
+export const login = (credentials) => {
   return async (dispatch) => {
     try {
       const response = await fetch("http://localhost:3001/api/v1/user/login", {
@@ -15,12 +15,18 @@ const login = (credentials) => {
       if (response.ok) {
         const data = await response.json();
         const token = data.body.token;
-        // console.log(data.message, token);
+
+        // Dispatch action to save token in store
+        dispatch(saveToken(token));
+
+        // Dispatch action to load token in store
+        dispatch(loadToken(token));
+
+        // Dispatch LOGIN_SUCCESS to update isAuthenticated state
         dispatch({
           type: "LOGIN_SUCCESS",
           payload: { message: data.message, token: token },
         });
-        // console.log("Action LOGIN_SUCCESS dispatchée avec succès");
       } else {
         const error = await response.json();
         dispatch({ type: "LOGIN_FAILURE", payload: error.message });
@@ -32,4 +38,36 @@ const login = (credentials) => {
   };
 };
 
-export default login;
+const saveToken = (token) => {
+  localStorage.setItem("token", token); // Stockage du token dans le local storage
+  return {
+    type: "SAVE_TOKEN",
+    payload: token,
+  };
+};
+
+export const loadToken = (token) => ({
+  type: "LOAD_TOKEN",
+  payload: token,
+});
+
+export const removeToken = () => {
+  localStorage.removeItem("token"); // Suppression du token du local storage
+  return {
+    type: "LOGOUT",
+  };
+};
+
+export const logout = () => {
+  return async (dispatch) => {
+    try {
+      // Suppression du token du store
+      dispatch(removeToken());
+
+      // Mise à jour du statut isAuthenticated
+      dispatch({ type: "LOGOUT" });
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
+};

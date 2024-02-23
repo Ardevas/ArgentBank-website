@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import login from "../../actions/authActions";
+import { login } from "../../actions/authActions";
+import { fetchUserProfile } from "../../actions/userProfile";
 
 function Login() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ function Login() {
     e.preventDefault();
     // console.log(credentials);
     await dispatch(login(credentials));
+    await dispatch(fetchUserProfile());
     navigate("/user");
   };
 
