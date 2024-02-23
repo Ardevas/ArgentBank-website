@@ -30,7 +30,6 @@ export const login = (credentials) => {
       } else {
         const error = await response.json();
         dispatch({ type: "LOGIN_FAILURE", payload: error.message });
-        // console.log("Action LOGIN_FAILURE dispatchée avec succès");
       }
     } catch (error) {
       dispatch({ type: "LOGIN_FAILURE", payload: error.message });
@@ -39,7 +38,7 @@ export const login = (credentials) => {
 };
 
 const saveToken = (token) => {
-  localStorage.setItem("token", token); // Stockage du token dans le local storage
+  localStorage.setItem("token", token); // Stock token in local storage
   return {
     type: "SAVE_TOKEN",
     payload: token,
@@ -52,7 +51,7 @@ export const loadToken = (token) => ({
 });
 
 export const removeToken = () => {
-  localStorage.removeItem("token"); // Suppression du token du local storage
+  localStorage.removeItem("token"); // Delete token from local storage
   return {
     type: "LOGOUT",
   };
@@ -61,10 +60,9 @@ export const removeToken = () => {
 export const logout = () => {
   return async (dispatch) => {
     try {
-      // Suppression du token du store
       dispatch(removeToken());
 
-      // Mise à jour du statut isAuthenticated
+      // Update isAuthenticated state
       dispatch({ type: "LOGOUT" });
     } catch (error) {
       console.error("Error logging out:", error);

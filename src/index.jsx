@@ -18,19 +18,19 @@ import "./styles/main.css";
 import { Provider } from "react-redux";
 import store from "./store/store";
 import { loadToken } from "./actions/authActions";
-import { fetchUserProfile } from "./actions/userProfile";
+import { fetchUserProfile } from "./actions/fetchUserProfile";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = localStorage.getItem("token"); // Récupération du token depuis le local storage
+    const token = localStorage.getItem("token"); // get token from local storage
     if (token) {
-      // S'il y a un token dans le local storage, le charger dans le store Redux
+      // dispatch action to load token and fetch user profile
       dispatch(loadToken(token));
       dispatch(fetchUserProfile());
     }
-  }, [dispatch]); // Assurez-vous de ne lancer cette action qu'une seule fois au chargement de l'application
+  }, [dispatch]);
 
   return (
     <Router>

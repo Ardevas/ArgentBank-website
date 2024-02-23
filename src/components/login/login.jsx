@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../actions/authActions";
-import { fetchUserProfile } from "../../actions/userProfile";
+import { fetchUserProfile } from "../../actions/fetchUserProfile";
 
 function Login() {
   const dispatch = useDispatch();
@@ -13,12 +13,11 @@ function Login() {
   });
 
   const handleChange = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+    setCredentials({ ...credentials, [e.target.name]: e.target.value }); // Update credentials state
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(credentials);
     await dispatch(login(credentials));
     await dispatch(fetchUserProfile());
     navigate("/user");

@@ -8,7 +8,6 @@ export default function Header() {
     (state) => state.authReducer.isAuthenticated
   );
   const firstName = useSelector((state) => state.userReducer.firstName);
-  console.log(firstName);
   const dispatch = useDispatch();
 
   const handleLogout = () => {

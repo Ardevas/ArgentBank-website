@@ -7,9 +7,6 @@ export default function PrivateRoute({ children }) {
   const token = useSelector((state) => state.authReducer.token);
   const isLoading = useSelector((state) => state.authReducer.isLoading);
 
-  // console.log("token:", token);
-  // console.log("isLoading:", isLoading);
-
   if (token && !isLoading) {
     return children;
   }
