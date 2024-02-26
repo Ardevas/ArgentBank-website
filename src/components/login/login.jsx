@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../actions/authActions";
 import { fetchUserProfile } from "../../actions/fetchUserProfile";
@@ -11,16 +11,19 @@ function Login() {
     username: "",
     password: "",
   });
+  const error = useSelector((state) => state.authReducer.error);
 
   const handleChange = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value }); // Update credentials state
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(login(credentials));
-    await dispatch(fetchUserProfile());
-    navigate("/user");
+    try {
+      await dispatch(login(credentials));
+      await dispatch(fetchUserProfile());
+      navigate("/user");
+    } catch (error) {}
   };
 
   return (
@@ -50,6 +53,8 @@ function Login() {
           <input type="checkbox" id="remember-me" />
           <label htmlFor="remember-me">Remember me</label>
         </div>
+        {error && <p style={{ color: "red" }}>{error}</p>}{" "}
+        {/* Display error message in red */}
         <button type="submit" className="sign-in-button">
           Sign in
         </button>

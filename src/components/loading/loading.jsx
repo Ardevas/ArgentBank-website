@@ -1,11 +1,9 @@
 import React from "react";
 
-export default function Loading() {
+export default function Loading({ error }) {
   return (
     <div className="loading">
-      <main>
-        <h1>Loading ...</h1>
-      </main>
+      <main>{error && <p style={{ color: "red" }}>{error}</p>}</main>
     </div>
   );
 }
