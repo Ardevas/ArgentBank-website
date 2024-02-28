@@ -1,11 +1,8 @@
 const initialState = {
   email: "",
-  password: "",
   firstName: "",
   lastName: "",
   userName: "",
-  createdAt: "",
-  updatedAt: "",
   id: "",
 };
 

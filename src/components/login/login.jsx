@@ -12,6 +12,7 @@ function Login() {
     password: "",
   });
   const error = useSelector((state) => state.authReducer.error);
+  console.log(error);
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -53,8 +54,13 @@ function Login() {
           <input type="checkbox" id="remember-me" />
           <label htmlFor="remember-me">Remember me</label>
         </div>
-        {error && <p style={{ color: "red" }}>{error}</p>}{" "}
-        {/* Display error message in red */}
+        {error && (
+          <p style={{ color: "red" }}>
+            {error === "Error: User not found!"
+              ? "Username or password incorrect."
+              : "An error has occurred. Please try again later."}
+          </p>
+        )}
         <button type="submit" className="sign-in-button">
           Sign in
         </button>
