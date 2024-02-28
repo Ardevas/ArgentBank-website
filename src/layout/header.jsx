@@ -7,7 +7,7 @@ export default function Header() {
   const isAuthenticated = useSelector(
     (state) => state.authReducer.isAuthenticated
   );
-  const firstName = useSelector((state) => state.userReducer.firstName);
+  const userName = useSelector((state) => state.userReducer.userName);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -35,7 +35,7 @@ export default function Header() {
         <div className="main-nav-items">
           <a className="main-nav-item" href="./user">
             <i className="fa fa-user-circle"></i>
-            {firstName}
+            {userName}
           </a>
           <a className="main-nav-item" href="./" onClick={handleLogout}>
             Sign Out
