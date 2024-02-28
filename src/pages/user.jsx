@@ -58,19 +58,43 @@ export default function User() {
           )}
           {isEditing ? (
             <>
-              <input
-                type="text"
-                value={newUserName}
-                onChange={handleUserNameChange}
-              />
-              <input type="text" value={firstName} disabled />
-              <input type="text" value={lastName} disabled />
-              <button className="edit-button" onClick={handleSave}>
-                Save
-              </button>
-              <button className="edit-button" onClick={handleCancel}>
-                Cancel
-              </button>
+              <div className="edit-inputs">
+                <div className="edit-inputs-label">
+                  <p>User name:</p>
+                  <input
+                    className="edit-input"
+                    type="text"
+                    value={newUserName}
+                    onChange={handleUserNameChange}
+                  />
+                </div>
+                <div className="edit-inputs-label">
+                  <p>First name:</p>
+                  <input
+                    className="edit-input"
+                    type="text"
+                    value={firstName}
+                    disabled
+                  />
+                </div>
+                <div className="edit-inputs-label">
+                  <p>Last name:</p>
+                  <input
+                    className="edit-input"
+                    type="text"
+                    value={lastName}
+                    disabled
+                  />
+                </div>
+              </div>
+              <div>
+                <button className="edit-button" onClick={handleSave}>
+                  Save
+                </button>
+                <button className="edit-button" onClick={handleCancel}>
+                  Cancel
+                </button>
+              </div>
             </>
           ) : (
             <button className="edit-button" onClick={handleEditName}>
