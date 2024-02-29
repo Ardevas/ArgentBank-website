@@ -5,13 +5,12 @@ import SignIn from "../pages/signIn";
 
 export default function PrivateRoute({ children }) {
   const token = useSelector((state) => state.authReducer.token);
-  const isLoading = useSelector((state) => state.authReducer.isLoading);
 
-  if (token && !isLoading) {
+  if (token) {
     return children;
   }
 
-  if (!token && isLoading) {
+  if (!token) {
     return <SignIn />;
   }
 
