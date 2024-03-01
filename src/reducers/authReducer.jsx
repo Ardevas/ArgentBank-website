@@ -2,7 +2,6 @@ const initialState = {
   isAuthenticated: false,
   message: null,
   token: null,
-  isLoading: true,
   error: null,
 };
 
@@ -14,7 +13,6 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: true,
         message: action.payload.message,
         token: action.payload.token,
-        isLoading: false,
         error: null,
       };
     case "LOGIN_FAILURE":
@@ -23,7 +21,6 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: false,
         message: null,
         token: null,
-        isLoading: true,
         error: action.payload,
       };
     case "LOGOUT":
@@ -31,7 +28,6 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: false,
         message: null,
         token: null,
-        isLoading: false,
         error: null,
       };
     case "SAVE_TOKEN":
@@ -44,7 +40,6 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isAuthenticated: true,
         token: action.payload,
-        isLoading: false,
       };
     default:
       return state;

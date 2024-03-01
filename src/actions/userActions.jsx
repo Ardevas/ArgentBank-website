@@ -1,6 +1,6 @@
 import { saveUserProfile } from "./fetchUserProfile";
 
-export const updateUserProfile = (userId, newUserName) => {
+export const updateUserProfile = (_, newUserName) => {
   return async (dispatch, getState) => {
     try {
       const token = getState().authReducer.token;
@@ -13,7 +13,7 @@ export const updateUserProfile = (userId, newUserName) => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ userName: newUserName }), // Envoyer uniquement le userName
+          body: JSON.stringify({ userName: newUserName }), // Send the new user name
         }
       );
 
@@ -23,13 +23,12 @@ export const updateUserProfile = (userId, newUserName) => {
 
       const data = await response.json();
 
-      // Dispatch une action pour mettre à jour le profil utilisateur dans le store si nécessaire
+      // Dispatch action to save the updated user profile in the store
       dispatch(saveUserProfile(data.body));
 
-      // Afficher un message de succès ou effectuer d'autres actions nécessaires
+      // Display a success message to the user
     } catch (error) {
       console.error("Error updating user profile:", error);
-      // Gérer les erreurs de mise à jour du profil utilisateur
     }
   };
 };

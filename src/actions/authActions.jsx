@@ -19,9 +19,6 @@ export const login = (credentials) => {
         // Dispatch action to save token in store
         dispatch(saveToken(token));
 
-        // Dispatch action to load token in store
-        dispatch(loadToken(token));
-
         // Dispatch LOGIN_SUCCESS to update isAuthenticated state
         dispatch({
           type: "LOGIN_SUCCESS",

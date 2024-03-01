@@ -7,6 +7,7 @@ const rootReducer = {
   userReducer,
 };
 
+// Don't forget to remove the devTools option when you're ready to deploy your app !
 const store = configureStore({ reducer: rootReducer, devTools: true });
 
 export default store;
